@@ -6,6 +6,8 @@
 > 支持易语言原生插件开发，支持其它语言(通过HTTP与webhook)插件开发  
 >   
 
+# 更新日志
+> [Read](/changelog.md)  
 
 # SDK
 > [二次开发工具下载](https://github.com/TeleBotKit/TeleBotKit/releases/tag/TeleBotKit-SDK)  
