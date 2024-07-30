@@ -9,18 +9,11 @@
 # 更新日志
 > [Read](/changelog.md)  
 
-# SDK
-> [二次开发工具下载](https://github.com/TeleBotKit/TeleBotKit/releases/tag/TeleBotKit-SDK)  
-> 如果缺少想要的接口可联系作者添加  
-
 # 框架
-> [前往下载最新版框架](https://github.com/TeleBotKit/TeleBotKit/releases/latest)
+> [前往下载最新版框架](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
 
-# 官方插件
-> 消息管理器  
-> 代理管理器  
-> 联系人管理器  
-> 消息自毁  
+# SDK
+> [前往下载最新版二次开发工具](https://github.com/TeleBotKit/TeleBotKit/releases/tag/TeleBotKit-SDK)  
 
 # 使用
 > 本框架与SDK可免费使用(限一个账号，无其它限制)，联系QQ78852405即可，请用等级大于40的大号联系    
