@@ -145,6 +145,128 @@
 如有错误，联系 <a href="https://t.me/secp256k0">https://t.me/secp256k0</a></p>
 </blockquote>
 <h2 id="目录">目录</h2>
+<ul>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#tdapi">TdApi</a>
+<ul>
+<li><a href="#%E6%97%A5%E5%BF%97">日志</a></li>
+<li><a href="#%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97">错误日志</a></li>
+<li><a href="#%E9%87%8A%E6%94%BE%E8%BF%94%E5%9B%9E%E6%8C%87%E9%92%88">释放返回指针</a></li>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6">下载文件</a></li>
+</ul>
+</li>
+<li><a href="#tdbot">TdBot</a></li>
+<li><a href="#tdmessage">TdMessage</a>
+<ul>
+<li><a href="#%E5%88%A0%E9%99%A4%E6%B6%88%E6%81%AF">删除消息</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9B%9E%E8%B0%83%E5%93%8D%E5%BA%94">查询机器人回调响应</a></li>
+<li><a href="#%E8%BD%AC%E5%8F%91%E6%B6%88%E6%81%AF">转发消息</a></li>
+</ul>
+</li>
+<li><a href="#tdproxy">TdProxy</a>
+<ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%90%86">添加代理</a></li>
+<li><a href="#%E7%A6%81%E7%94%A8%E4%BB%A3%E7%90%86">禁用代理</a></li>
+<li><a href="#%E7%BC%96%E8%BE%91%E4%BB%A3%E7%90%86">编辑代理</a></li>
+<li><a href="#%E5%90%AF%E7%94%A8%E4%BB%A3%E7%90%86">启用代理</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E4%BB%A3%E7%90%86%E5%88%97%E8%A1%A8">获取代理列表</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E4%BB%A3%E7%90%86%E9%93%BE%E6%8E%A5">获取代理链接</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%90%86">测试代理</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E4%BB%A3%E7%90%86">删除代理</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%90%86%E4%B8%8Edc">测试代理与DC</a></li>
+</ul>
+</li>
+<li><a href="#tdchat">TdChat</a>
+<ul>
+<li><a href="#%E6%90%9C%E7%B4%A2%E8%81%8A%E5%A4%A9%E5%AF%B9%E8%B1%A1">搜索聊天对象</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E5%85%AC%E5%85%B1%E8%81%8A%E5%A4%A9">查询公共聊天</a></li>
+<li><a href="#%E6%90%9C%E7%B4%A2%E5%85%AC%E5%85%B1%E8%81%8A%E5%A4%A9">搜索公共聊天</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E8%81%8A%E5%A4%A9%E5%AF%B9%E8%B1%A1">查询聊天对象</a></li>
+<li><a href="#%E5%8A%A0%E8%BD%BD%E8%81%8A%E5%A4%A9%E5%88%97%E8%A1%A8">加载聊天列表</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E8%81%8A%E5%A4%A9%E5%88%97%E8%A1%A8">获取聊天列表</a></li>
+<li><a href="#%E5%8A%A0%E8%BD%BD%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E8%81%94%E7%B3%BB%E4%BA%BA">加载所有用户联系人</a></li>
+</ul>
+</li>
+<li><a href="#tdgroup">TdGroup</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E8%B6%85%E7%BA%A7%E7%BE%A4">创建超级群</a></li>
+<li><a href="#%E5%8A%A0%E5%85%A5%E8%81%8A%E5%A4%A9">加入聊天</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E8%81%8A%E5%A4%A9%E5%8A%A0%E5%85%A5%E8%AF%B7%E6%B1%82">处理聊天加入请求</a></li>
+</ul>
+</li>
+<li><a href="#tdoption">TdOption</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E9%85%8D%E7%BD%AE%E9%A1%B9">获取配置项</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%9C%A8%E7%BA%BF%E7%8A%B6%E6%80%81">设置用户在线状态</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E9%80%BB%E8%BE%91%E5%9E%8B%E9%85%8D%E7%BD%AE%E9%A1%B9">设置逻辑型配置项</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%A9%BA%E5%9E%8B%E9%85%8D%E7%BD%AE%E9%A1%B9">设置空型配置项</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E6%95%B4%E5%9E%8B%E9%85%8D%E7%BD%AE%E9%A1%B9">设置整型配置项</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E5%AD%97%E7%AC%A6%E5%9E%8B%E9%85%8D%E7%BD%AE%E9%A1%B9">设置字符型配置项</a></li>
+</ul>
+</li>
+<li><a href="#tduser">TdUser</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E8%87%AA%E8%BA%AB%E4%BF%A1%E6%81%AF">获取自身信息</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF">获取用户信息</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%AE%8C%E6%95%B4%E4%BF%A1%E6%81%AF">获取用户完整信息</a></li>
+</ul>
+</li>
+<li><a href="#tdobjectfactory">TdObjectFactory</a>
+<ul>
+<li><a href="#freeobject">FreeObject</a></li>
+<li><a href="#linkpreviewoptions">linkPreviewOptions</a></li>
+<li><a href="#inputmessagetext">inputMessageText</a></li>
+<li><a href="#inputmessagephoto">inputMessagePhoto</a></li>
+<li><a href="#inputmessagereplytomessage">inputMessageReplyToMessage</a></li>
+<li><a href="#inputmessagereplytoexternalmessage">inputMessageReplyToExternalMessage</a></li>
+<li><a href="#inputmessagereplytostory">inputMessageReplyToStory</a></li>
+<li><a href="#messagesendoptions">messageSendOptions</a></li>
+<li><a href="#inputfileid">inputFileId</a></li>
+<li><a href="#inputfilelocal">inputFileLocal</a></li>
+<li><a href="#inputfileremote">inputFileRemote</a></li>
+<li><a href="#callbackquerypayloaddata">callbackQueryPayloadData</a></li>
+<li><a href="#callbackquerypayloaddatawithpassword">callbackQueryPayloadDataWithPassword</a></li>
+<li><a href="#callbackquerypayloadgame">callbackQueryPayloadGame</a></li>
+<li><a href="#chatadministratorrights">chatAdministratorRights</a></li>
+<li><a href="#chatpermissions">chatPermissions</a></li>
+</ul>
+</li>
+<li><a href="#tdmessagesent">TdMessageSent</a>
+<ul>
+<li><a href="#%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF">发送消息</a></li>
+<li><a href="#%E5%8F%91%E9%80%81%E5%8E%9F%E5%A7%8B%E6%B6%88%E6%81%AF">发送原始消息</a></li>
+<li><a href="#%E5%8F%91%E9%80%81%E6%96%87%E6%9C%AC%E6%B6%88%E6%81%AF">发送文本消息</a></li>
+<li><a href="#%E5%8F%91%E9%80%81%E5%9B%BE%E7%89%87%E6%B6%88%E6%81%AF">发送图片消息</a></li>
+</ul>
+</li>
+<li><a href="#tdmessageformat">TdMessageFormat</a>
+<ul>
+<li><a href="#%E8%BD%AC%E6%8D%A2%E4%B8%BAmarkdown%E6%96%87%E6%9C%AC">转换为Markdown文本</a></li>
+</ul>
+</li>
+<li><a href="#tdmessageedit">TdMessageEdit</a>
+<ul>
+<li><a href="#%E7%BC%96%E8%BE%91%E5%AA%92%E4%BD%93%E6%B6%88%E6%81%AF%E6%A0%87%E9%A2%98">编辑媒体消息标题</a></li>
+</ul>
+</li>
+<li><a href="#tdaccountmap">TdAccountMap</a>
+<ul>
+<li><a href="#getclient">GetClient</a></li>
+<li><a href="#getclientbyaccount">GetClientByAccount</a></li>
+<li><a href="#getaccountid">GetAccountId</a></li>
+</ul>
+</li>
+<li><a href="#tdchatmember">TdChatMember</a>
+<ul>
+<li><a href="#%E8%8E%B7%E5%8F%96%E8%B6%85%E7%BA%A7%E7%BE%A4%E6%88%90%E5%91%98%E5%88%97%E8%A1%A8">获取超级群成员列表</a></li>
+<li><a href="#%E5%B0%81%E7%A6%81%E7%BE%A4%E6%88%90%E5%91%98">封禁群成员</a></li>
+<li><a href="#%E8%A7%A3%E5%B0%81%E7%BE%A4%E6%88%90%E5%91%98">解封群成员</a></li>
+<li><a href="#%E8%B8%A2%E5%87%BA%E7%BE%A4%E6%88%90%E5%91%98">踢出群成员</a></li>
+<li><a href="#%E9%99%90%E5%88%B6%E7%BE%A4%E6%88%90%E5%91%98">限制群成员</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E7%AE%A1%E7%90%86%E5%91%98">设置管理员</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="tdapi">TdApi</h2>
 <h3 id="日志">日志</h3>
 <blockquote>
