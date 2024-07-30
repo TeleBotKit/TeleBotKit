@@ -1,7 +1,9 @@
 > TeleBotKit SDK文档    
 > 更新日期：2024-07-30 19:59:13    
 > 版本：10    
-> 如有错误，联系 https://t.me/secp256k0    
+> 如有错误，联系 https://t.me/secp256k0  
+
+
   
 
 
