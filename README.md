@@ -7,13 +7,14 @@
 >   
 
 # 更新日志
-> [Read](/changelog.md)  
+> [查看更新日志](/changelog.md)  
 
 # 框架
 > [前往下载最新版框架](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
 
 # SDK
 > [前往下载最新版二次开发工具](https://github.com/TeleBotKit/TeleBotKit/releases/tag/TeleBotKit-SDK)  
+> [查看SDK文档](/SDK-DOC.md)  
 
 # 使用
 > 本框架与SDK可免费使用(限一个账号，无其它限制)，联系QQ78852405即可，请用等级大于40的大号联系    
