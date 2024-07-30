@@ -1,5 +1,10 @@
 # TeleBotKit
-[![Version](https://badge.fury.io/gh/TeleBotKit%2TeleBotKit-release.svg)](https://github.com/TeleBotKit/TeleBotKit/releases)
+[![Version](https://img.shields.io/badge/%e7%89%88%e6%9c%ac-latest-brightgreen.svg)](https://github.com/TeleBotKit/TeleBotKit/releases)
+[![Platform](https://img.shields.io/badge/%e5%b9%b3%e5%8f%b0-%20Windows%20-brightgreen.svg)](https://github.com/TeleBotKit/TeleBotKit)
+[![license](https://img.shields.io/badge/%e6%8e%88%e6%9d%83-%20%e5%85%8d%e8%b4%b9%20%7c%20%e4%bb%98%e8%b4%b9%20-brightgreen.svg?style=flat)](https://github.com/TeleBotKit/TeleBotKit)
+![](https://komarev.com/ghpvc/?username=TeleBotKit&style=flat)
+
+
 > ![界面](src/1.png) 
 ## 介绍
 > 一个电报(Telegram)开发框架，基于MTProtoTG官方协议  
@@ -11,6 +16,7 @@
 
 ## 更新日志
 > [查看更新日志](/changelog.md)  
+> ![TeleBotKit's GitHub stats](https://github-readme-stats.vercel.app/api?username=TeleBotKit)  
 
 ## 框架
 > [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
@@ -28,6 +34,7 @@
 ## 免责声明
 > 该框架仅限个人使用，禁止从事商业活动，禁止使用SDK开发违法违规插件  
 > 
+
 
 ## 界面
 > ![插件](src/2.png)  
