@@ -4,14 +4,14 @@
 [![license](https://img.shields.io/badge/%e6%8e%88%e6%9d%83-%20%e5%85%8d%e8%b4%b9%20%7c%20%e4%bb%98%e8%b4%b9%20-brightgreen.svg?style=flat)](https://github.com/TeleBotKit/TeleBotKit)
 ![](https://komarev.com/ghpvc/?username=TeleBotKit&style=flat)
 
-
+ 
 > ![界面](src/1.png) 
 ## 介绍
 > 一个电报(Telegram)开发框架，基于MTProto协议  
 > 支持双卡双待，支持普通账号登录(手机号+验证码, session登录正在开发中)与机器人账号登录(Token)   
 > 支持多账号，框架可以多开登录，也可以在一个框架内登录多个账号    
-> 支持二次开发，基于事件推送的插件系统    
-> 支持易语言原生插件开发  
+> 支持二次开发，基于事件推送的插件系统，目前仅支持易语言开发插件    
+> 
 >   
 
 ## 更新日志
