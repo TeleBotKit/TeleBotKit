@@ -4,8 +4,10 @@
 [![license](https://img.shields.io/badge/%e6%8e%88%e6%9d%83-%20%e5%85%8d%e8%b4%b9%20%7c%20%e4%bb%98%e8%b4%b9%20-brightgreen.svg?style=flat)](https://github.com/TeleBotKit/TeleBotKit)
 ![](https://komarev.com/ghpvc/?username=TeleBotKit&style=flat)
 
- 
-> ![界面](src/1.png) 
+
+> ![界面](src/1.png)   
+
+
 ## 介绍
 > 一个电报(Telegram)开发框架，基于MTProto协议  
 > 支持双卡双待，支持普通账号登录(手机号+验证码, session登录正在开发中)与机器人账号登录(Token)   
@@ -15,14 +17,14 @@
 
 ## 更新日志
 > ![TeleBotKit's GitHub stats](https://github-readme-stats.vercel.app/api?username=TeleBotKit)  
-> [查看更新日志](/changelog.md)   
+> [更新日志](/changelog.md)   
 
 ## 框架
 > [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
 
 ## SDK
 > [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/tag/TeleBotKit-SDK)  
-> [查看SDK文档](/SDK-DOC.md)  
+> [SDK文档](/SDK-DOC.md)  
 
 ## 使用
 > 本框架与SDK可免费使用(限一个账号，无其它限制)，联系QQ78852405即可，请用等级大于40的大号联系    
