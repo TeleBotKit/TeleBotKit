@@ -1,4 +1,4 @@
-# TeleBotKit
+# telegram机器人框架 + sdk模块 + 插件模板
 [![Version](https://img.shields.io/badge/%e7%89%88%e6%9c%ac-latest-brightgreen.svg)](https://github.com/TeleBotKit/TeleBotKit/releases)
 [![Platform](https://img.shields.io/badge/%e5%b9%b3%e5%8f%b0-%20Windows%20-brightgreen.svg)](https://github.com/TeleBotKit/TeleBotKit)
 [![license](https://img.shields.io/badge/%e6%8e%88%e6%9d%83-%20%e5%85%8d%e8%b4%b9%20%7c%20%e4%bb%98%e8%b4%b9%20-brightgreen.svg?style=flat)](https://github.com/TeleBotKit/TeleBotKit)
