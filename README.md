@@ -22,8 +22,7 @@
 ## 框架
 > [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
 
-## SDK
-> [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/tag/TeleBotKit-SDK)  
+## 开发文档
 > [SDK文档](/SDK-DOC.md)  
 
 ## 使用
@@ -36,7 +35,12 @@
 > 
 
 
-## 界面
-> ![插件](src/2.png)  
-> ![插件](src/3.png)  
+## 插件示例
+### 插件系统界面  
+> ![插件](src/2.png)   
+### TG内置带里采集/测速器  
 > ![插件](src/4.png)  
+### 群成员采集  
+> ![插件](src/5.png)  
+### 关键词监控  
+> ![插件](src/6.png)  
