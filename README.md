@@ -19,20 +19,21 @@
 > ![TeleBotKit's GitHub stats](https://github-readme-stats.vercel.app/api?username=TeleBotKit)  
 > [更新日志](/changelog.md)   
 
-## 框架
-> [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
-
 ## 开发文档
 > [SDK文档](/SDK-DOC.md)  
 
 ## 使用
-> 本框架可免费使用，联系QQ**********即可    
+> 本框架可免费试用，联系 https://t.me/secp256k0     
 > 如需购买付费版或定制插件，联系 https://t.me/secp256k0  
-> 
+> 另接TRX兑换机器人，能量租赁机器人，钱包机器人等各类TG机器人开发
 
 ## 免责声明
 > 该框架仅限个人使用，禁止从事商业活动，禁止使用SDK开发违法违规插件  
 > 
+
+## 框架下载
+> [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
+
 
 
 ## 插件示例
