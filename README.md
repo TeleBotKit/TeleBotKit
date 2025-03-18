@@ -20,7 +20,8 @@
 > [更新日志](/changelog.md)   
 
 ## 开发文档
-> [SDK文档](/SDK-DOC.md)  
+> [SDK文档](/SDK-DOC.md)    
+> [开发指南](/开发指南.md)     
 
 ## 使用
 > 本框架可免费试用，联系 https://t.me/secp256k0     
