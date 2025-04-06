@@ -31,7 +31,7 @@
 > [前往下载](https://github.com/TeleBotKit/TeleBotKit/releases/latest)  
 
 ## 插件示例
-> [开发指南](/插件示例.md)  
+> [插件示例](/插件示例.md)  
 
 ## 免责声明
 > 该框架仅限个人使用，禁止从事商业活动，禁止使用SDK开发违法违规插件    
