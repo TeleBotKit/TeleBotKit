@@ -16,7 +16,6 @@
 > 
 
 ## 更新日志
-> ![TeleBotKit's GitHub stats](https://github-readme-stats.vercel.app/api?username=TeleBotKit)  
 > [更新日志](/changelog.md)   
 
 ## 开发文档
