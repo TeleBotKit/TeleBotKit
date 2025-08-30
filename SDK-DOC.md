@@ -1,6 +1,6 @@
 > TeleBotKit SDK文档  
-> 更新日期：2025-01-15 14:30:10  
-> 版本：15  
+> 更新日期：2025-05-27 11:34:11  
+> 版本：17  
 > 如有错误，联系 https://t.me/secp256k0  
 
 
@@ -14,11 +14,15 @@
   - [getMainWebApp](#getmainwebapp)
 - [TdBot](#tdbot)
   - [响应回调查询](#响应回调查询)
+  - [获取命令列表](#获取命令列表)
+  - [设置命令列表](#设置命令列表)
+  - [删除命令列表](#删除命令列表)
 - [TdMessage](#tdmessage)
   - [删除消息](#删除消息)
   - [查询机器人回调响应](#查询机器人回调响应)
   - [转发消息](#转发消息)
   - [转换为Markdown文本](#转换为markdown文本)
+  - [转发消息V2](#转发消息v2)
 - [TdProxy](#tdproxy)
   - [添加代理](#添加代理)
   - [禁用代理](#禁用代理)
@@ -35,12 +39,17 @@
   - [获取聊天列表](#获取聊天列表)
   - [加载所有用户联系人](#加载所有用户联系人)
   - [创建私人聊天](#创建私人聊天)
+  - [创建普通群聊天](#创建普通群聊天)
+  - [创建超级群聊天](#创建超级群聊天)
 - [TdGroup](#tdgroup)
   - [创建超级群](#创建超级群)
   - [加入聊天](#加入聊天)
   - [处理聊天加入请求](#处理聊天加入请求)
-  - [获取群成员列表](#获取群成员列表)
   - [离开聊天](#离开聊天)
+  - [获取超级群对象](#获取超级群对象)
+  - [获取普通群对象](#获取普通群对象)
+  - [创建普通群](#创建普通群)
+  - [升级普通群](#升级普通群)
 - [TdUser](#tduser)
   - [获取自身信息](#获取自身信息)
   - [获取用户对象](#获取用户对象)
@@ -109,10 +118,6 @@
   - [模糊搜索贴纸包](#模糊搜索贴纸包)
   - [查询贴纸包信息](#查询贴纸包信息)
   - [查询贴纸包名称](#查询贴纸包名称)
-- [常量定义](#常量定义)
-  - [事件类型](#事件类型)
-  - [消息类型](#消息类型)
-
 
 
 ## TdApi
@@ -224,6 +229,69 @@
 ---
 
 
+### 获取命令列表
+
+> 说明：获取机器人在指定用户作用域和语言下支持的命令列表；仅适用于机器人   
+> 原名：TdBot.getCommands  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                                                   |
+| ------------ | -------- | ---- | ---- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                                               |
+| scope        | 整数型   | 否   | 否   | 命令适用的作用域；0=默认；1=全体私聊；2=全体群聊；3=全体群聊管理员；4=指定聊天中所有成员；5=指定聊天中所有管理员；6=指定聊天中指定成员 |
+| chatId       | 长整数型 | 否   | 是   | 聊天标识符；scope为4，5，6时有效                                                                                                       |
+| userId       | 长整数型 | 否   | 是   | 用户标识符；scope为6时有效                                                                                                             |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                                                   |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                                                         |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                                                     |
+
+
+---
+
+
+### 设置命令列表
+
+> 说明：设置机器人为指定用户作用域和语言支持的命令列表；仅适用于机器人   
+> 原名：TdBot.setCommands  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                                                   |
+| ------------ | -------- | ---- | ---- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                                               |
+| scope        | 整数型   | 否   | 否   | 命令适用的作用域；0=默认；1=全体私聊；2=全体群聊；3=全体群聊管理员；4=指定聊天中所有成员；5=指定聊天中所有管理员；6=指定聊天中指定成员 |
+| chatId       | 长整数型 | 否   | 是   | 聊天标识符；scope为4，5，6时有效                                                                                                       |
+| userId       | 长整数型 | 否   | 是   | 用户标识符；scope为6时有效                                                                                                             |
+| languageCode | 文本型   | 否   | 是   | 一个两位的 ISO 639-1 语言代码。如果为空，则命令将应用于指定作用域中所有没有专属命令的用户语言                                          |
+| commands     | 文本型   | 否   | 否   | 命令列表；宽文本；格式为Json数组[{"@type":"botCommand","command":"","description":""}]                                                 |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                                                   |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                                                         |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                                                     |
+
+
+---
+
+
+### 删除命令列表
+
+> 说明：删除机器人为指定用户作用域和语言支持的命令列表；仅适用于机器人   
+> 原名：TdBot.deleteCommands  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                                                   |
+| ------------ | -------- | ---- | ---- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                                               |
+| scope        | 整数型   | 否   | 否   | 命令适用的作用域；0=默认；1=全体私聊；2=全体群聊；3=全体群聊管理员；4=指定聊天中所有成员；5=指定聊天中所有管理员；6=指定聊天中指定成员 |
+| chatId       | 长整数型 | 否   | 是   | 聊天标识符；scope为4，5，6时有效                                                                                                       |
+| userId       | 长整数型 | 否   | 是   | 用户标识符；scope为6时有效                                                                                                             |
+| languageCode | 文本型   | 否   | 是   | 一个两位的 ISO 639-1 语言代码。如果为空，则命令将应用于指定作用域中所有没有专属命令的用户语言                                          |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                                                   |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                                                         |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                                                     |
+
+
+---
+
+
 
 ## TdMessage
 ### 删除消息
@@ -300,6 +368,31 @@
 | -------- | ------ | ---- | ---- | -------------------- |
 | text     | 文本型 | 否   | 否   | 宽文本或UTF8文本     |
 | entities | 文本型 | 否   | 否   | 消息中的entities字段 |
+
+
+---
+
+
+### 转发消息V2
+
+> 说明：转发之前发送的消息。如果消息无法转发，将返回null而不是消息   
+> 原名：TdMessage.forwardMessagesV2  
+> 返回：逻辑型  
+
+| 参数名          | 类型     | 传址 | 可空 | 说明                                                                                     |
+| --------------- | -------- | ---- | ---- | ---------------------------------------------------------------------------------------- |
+| clientId        | 整数型   | 否   | 否   | 客户端ID                                                                                 |
+| chatId          | 长整数型 | 否   | 否   | 要转发消息的聊天标识符                                                                   |
+| fromChatId      | 长整数型 | 否   | 否   | 要从中转发消息的聊天标识符                                                               |
+| messageId       | 长整数型 | 否   | 否   | 要转发的消息标识符列表。仅当message.can_be_forwarded时才可以转发消息                     |
+| messageThreadId | 长整数型 | 否   | 是   | 如果不为0，则为消息将发送的消息讨论标识符；仅适用于论坛讨论                              |
+| options         | 长整数型 | 否   | 是   | [messageSendOptions]对象Id；用于发送消息的选项；传null使用默认选项                       |
+| sendCopy        | 逻辑型   | 否   | 是   | 传true表示复制消息内容而不引用原始发送者。如果消息被转发到秘密聊天或本地聊天，始终为true |
+| removeCaption   | 逻辑型   | 否   | 是   | 传true表示删除消息副本的媒体标题。如果send_copy为false，则忽略                           |
+| isSync          | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                     |
+| isFinal         | 逻辑型   | 否   | 是   | 是否返回最终消息；isSync默认为真                                                         |
+| responseData    | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                           |
+| responseLen     | 整数型   | 是   | 是   | 接口返回的结果长度                                                                       |
 
 
 ---
@@ -559,18 +652,56 @@
 
 ### 创建私人聊天
 
-> 说明：返回与给定用户对应的现有聊天   
+> 说明：返回与给定用户对应的现有聊天；主动发起第一次聊天前需要调用(对方没给你发过消息)；   
 > 原名：TdChat.createPrivateChat  
 > 返回：逻辑型  
 
-| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                                   |
-| ------------ | -------- | ---- | ---- | ---------------------------------------------------------------------------------------------------------------------- |
-| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                               |
-| userId       | 长整数型 | 否   | 否   | 用户标识符                                                                                                             |
-| force        | 逻辑型   | 否   | 是   | 传递 true 以在没有网络请求的情况下创建聊天。在这种情况下，关于聊天的所有信息，除了其类型、标题和照片，可能都是不正确的 |
-| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                                   |
-| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                                         |
-| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                                     |
+| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                         |
+| ------------ | -------- | ---- | ---- | ------------------------------------------------------------------------------------------------------------ |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                     |
+| userId       | 长整数型 | 否   | 否   | 用户标识符                                                                                                   |
+| force        | 逻辑型   | 否   | 是   | 是否强制创建聊天（跳过网络请求）。在这种情况下，关于聊天的所有信息，除了其类型、标题和照片，可能都是不正确的 |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                         |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                               |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                           |
+
+
+---
+
+
+### 创建普通群聊天
+
+> 说明：返回与已知基础群组对应的现有聊天；主动发起第一次聊天前需要调用(对方没给你发过消息)；   
+> 原名：TdChat.createBasicGroupChat  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                         |
+| ------------ | -------- | ---- | ---- | ------------------------------------------------------------------------------------------------------------ |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                     |
+| basicGroupId | 长整数型 | 否   | 否   | 基础群组的Id(非聊天Id)                                                                                       |
+| force        | 逻辑型   | 否   | 是   | 是否强制创建聊天（跳过网络请求）。在这种情况下，关于聊天的所有信息，除了其类型、标题和照片，可能都是不正确的 |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                         |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                               |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                           |
+
+
+---
+
+
+### 创建超级群聊天
+
+> 说明：返回与已知超级群组或频道对应的现有聊天；主动发起第一次聊天前需要调用(对方没给你发过消息)；   
+> 原名：TdChat.createSupergroupChat  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                                                                                         |
+| ------------ | -------- | ---- | ---- | ------------------------------------------------------------------------------------------------------------ |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                                                                                     |
+| supergroupId | 长整数型 | 否   | 否   | 超级群组或频道的Id(非聊天Id)                                                                                 |
+| force        | 逻辑型   | 否   | 是   | 是否强制创建聊天（跳过网络请求）。在这种情况下，关于聊天的所有信息，除了其类型、标题和照片，可能都是不正确的 |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。                                                                         |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                               |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                                                                                           |
 
 
 ---
@@ -641,20 +772,17 @@
 ---
 
 
-### 获取群成员列表
+### 离开聊天
 
-> 说明：返回群组或频道中的成员的信息。可能需要管理员权限。   
-> 原名：TdGroup.getMembers  
+> 说明：将当前用户从聊天成员中移除。无法使用此方法退出私聊和秘密聊天   
+> 原名：TdGroup.leaveChat  
 > 返回：逻辑型  
 
 | 参数名       | 类型     | 传址 | 可空 | 说明                                           |
 | ------------ | -------- | ---- | ---- | ---------------------------------------------- |
 | clientId     | 整数型   | 否   | 否   | 客户端ID                                       |
-| type         | 整数型   | 否   | 否   | 1=超级群，2=普通群                             |
-| supergroupId | 长整数型 | 否   | 否   | 超级组或频道的标识符，去掉前面的-100           |
-| limit        | 整数型   | 否   | 是   | 一次返回的数量，最大200; 默认100               |
-| offset       | 整数型   | 否   | 是   | 要跳过的用户数; 默认0                          |
-| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过Result返回结果               |
+| chatId       | 长整数型 | 否   | 否   | 聊天标识符                                     |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。           |
 | responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放 |
 | responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                             |
 
@@ -662,10 +790,68 @@
 ---
 
 
-### 离开聊天
+### 获取超级群对象
 
-> 说明：将当前用户从聊天成员中移除。无法使用此方法退出私聊和秘密聊天   
-> 原名：TdGroup.leaveChat  
+> 说明：通过标识符获取超级群组或频道的信息。如果当前用户不是机器人，这是一个离线请求   
+> 原名：TdGroup.getSupergroup  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                           |
+| ------------ | -------- | ---- | ---- | ---------------------------------------------- |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                       |
+| supergroupId | 长整数型 | 否   | 否   | 超级群组或频道的Id(非聊天Id)                   |
+| isFull       | 逻辑型   | 否   | 是   | 是否获取完整信息，缓存时间最长为1分钟          |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。           |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放 |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                             |
+
+
+---
+
+
+### 获取普通群对象
+
+> 说明：通过标识符获取基础群组的信息。如果当前用户不是机器人，这是一个离线请求   
+> 原名：TdGroup.getBasicGroup  
+> 返回：逻辑型  
+
+| 参数名       | 类型     | 传址 | 可空 | 说明                                           |
+| ------------ | -------- | ---- | ---- | ---------------------------------------------- |
+| clientId     | 整数型   | 否   | 否   | 客户端ID                                       |
+| basicGroupId | 长整数型 | 否   | 否   | 基础群组的Id(非聊天Id)                         |
+| isFull       | 逻辑型   | 否   | 是   | 是否获取完整信息，缓存时间最长为1分钟          |
+| isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。           |
+| responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放 |
+| responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                             |
+
+
+---
+
+
+### 创建普通群
+
+> 说明：创建一个新的基础群组，并发送相应的 messageBasicGroupChatCreate。返回新创建的聊天信息   
+> 原名：TdGroup.createNewBasicGroupChat  
+> 返回：逻辑型  
+
+| 参数名                | 类型   | 传址 | 可空 | 说明                                                                                                 |
+| --------------------- | ------ | ---- | ---- | ---------------------------------------------------------------------------------------------------- |
+| clientId              | 整数型 | 否   | 否   | 客户端ID                                                                                             |
+| title                 | 文本型 | 否   | 否   | 宽文本或utf8 聊天标题;1-128 个字符。                                                                 |
+| userIds               | 文本型 | 否   | 是   | 例：[1234000,232342100]；要添加到基础群组中的用户标识符；可为空，用于创建不包含其他成员的基础群组    |
+| messageAutoDeleteTime | 整数型 | 否   | 是   | 消息自动删除时间值，以秒为单位；必须从0到365 * 86400，并且可被86400整除。如果为0，则消息不会自动删除 |
+| isSync                | 逻辑型 | 否   | 是   | 是否同步执行，通过response返回结果。                                                                 |
+| responseData          | 整数型 | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放                                                       |
+| responseLen           | 整数型 | 是   | 是   | 接口返回的结果长度                                                                                   |
+
+
+---
+
+
+### 升级普通群
+
+> 说明：从现有基础群组创建一个新的超级群组，并发送相应的 messageChatUpgradeTo 和 messageChatUpgradeFrom；需要拥有者权限。会停用原始基础群组   
+> 原名：TdGroup.upgradeBasicGroupChatToSupergroupChat  
 > 返回：逻辑型  
 
 | 参数名       | 类型     | 传址 | 可空 | 说明                                           |
@@ -1369,7 +1555,6 @@
 | clientId     | 整数型   | 否   | 否   | 客户端ID                                       |
 | chatId       | 长整数型 | 否   | 否   | 聊天标识符                                     |
 | userId       | 长整数型 | 否   | 否   | 成员标识符                                     |
-| permissions  | 长整数型 | 否   | 是   | [chatPermissions]对象Id；用户在聊天中的权限；  |
 | isSync       | 逻辑型   | 否   | 是   | 是否同步执行，通过response返回结果。           |
 | responseData | 整数型   | 是   | 是   | 接口返回的结果指针，该指针需要通过Free方法释放 |
 | responseLen  | 整数型   | 是   | 是   | 接口返回的结果长度                             |
@@ -1838,244 +2023,3 @@
 
 
 
-
-
-## 常量定义
-### 事件类型
-| 事件英文名                            | 事件数值    | 注释                     |
-| ------------------------------------- | ----------- | ------------------------ |
-| updateAuthorizationState              | 1671776893  | 授权状态变更             |
-| updateNewMessage                      | -399906475  | 新消息                   |
-| updateMessageSendAcknowledged         | -2000829996 | 消息发送已确认           |
-| updateMessageSendSucceeded            | 525868072   | 消息发送成功             |
-| updateMessageSendFailed               | 484962255   | 消息发送失败             |
-| updateMessageContent                  | 1005273445  | 消息内容变更             |
-| updateMessageEdited                   | 451125255   | 消息被编辑               |
-| updateMessageIsPinned                 | 1685539610  | 消息置顶状态变更         |
-| updateMessageInteractionInfo          | -188173810  | 消息互动信息更新         |
-| updateMessageContentOpened            | -59327118   | 消息内容被打开           |
-| updateMessageMentionRead              | 1989766898  | 提及已读                 |
-| updateMessageUnreadReactions          | -451923675  | 未读消息反应             |
-| updateMessageFactCheck                | 301073724   | 消息事实核查             |
-| updateMessageLiveLocationViewed       | 2017179958  | 实时位置被查看           |
-| updateVideoPublished                  | -2069514327 | 视频发布状态更新         |
-| updateNewChat                         | -1313594830 | 新聊天创建               |
-| updateChatTitle                       | -1154938587 | 聊天标题变更             |
-| updateChatPhoto                       | -2090282272 | 聊天照片变更             |
-| updateChatAccentColors                | 2112240596  | 聊天强调色变更           |
-| updateChatPermissions                 | -1427624729 | 聊天权限变更             |
-| updateChatLastMessage                 | -1246514358 | 聊天最后消息更新         |
-| updateChatPosition                    | 745282058   | 聊天位置变更             |
-| updateChatAddedToList                 | -301050392  | 聊天被添加到列表         |
-| updateChatRemovedFromList             | -403871407  | 聊天从列表移除           |
-| updateChatReadInbox                   | 1344811217  | 聊天收件箱已读           |
-| updateChatReadOutbox                  | 2051369909  | 聊天发件箱已读           |
-| updateChatActionBar                   | -1531659794 | 聊天操作栏变更           |
-| updateChatBusinessBotManageBar        | -1363841589 | 商业机器人管理栏更新     |
-| updateChatAvailableReactions          | 1782640549  | 可用消息反应变更         |
-| updateChatDraftMessage                | 537140484   | 聊天草稿消息更新         |
-| updateChatEmojiStatus                 | -1980969111 | 聊天表情状态变更         |
-| updateChatMessageSender               | 1944830309  | 聊天消息发送者变更       |
-| updateChatMessageAutoDeleteTime       | 1732071708  | 消息自动删除时间变更     |
-| updateChatNotificationSettings        | -130904723  | 通知设置变更             |
-| updateChatPendingJoinRequests         | -192857659  | 待处理的加入请求         |
-| updateChatReplyMarkup                 | -57627063   | 聊天回复标记更新         |
-| updateChatBackground                  | -1539291413 | 聊天背景变更             |
-| updateChatTheme                       | 854783336   | 聊天主题变更             |
-| updateChatUnreadMentionCount          | 2066421182  | 未读提及计数更新         |
-| updateChatUnreadReactionCount         | 788456193   | 未读反应计数更新         |
-| updateChatVideoChat                   | -2114234929 | 视频聊天状态更新         |
-| updateChatDefaultDisableNotification  | -1766575216 | 默认通知禁用状态         |
-| updateChatHasProtectedContent         | 239432273   | 聊天内容保护状态         |
-| updateChatIsTranslatable              | 319816048   | 聊天可翻译状态           |
-| updateChatIsMarkedAsUnread            | 1593964742  | 聊天标记为未读           |
-| updateChatViewAsTopics                | -742169333  | 话题视图模式切换         |
-| updateChatBlockList                   | 1214670495  | 聊天屏蔽列表更新         |
-| updateChatHasScheduledMessages        | -859245768  | 定时消息状态变更         |
-| updateChatFolders                     | -681181481  | 聊天文件夹更新           |
-| updateChatOnlineMemberCount           | -1566783164 | 在线成员数更新           |
-| updateSavedMessagesTopic              | 10948428    | 收藏消息主题更新         |
-| updateSavedMessagesTopicCount         | -1356020662 | 收藏消息主题计数更新     |
-| updateQuickReplyShortcut              | -1526699182 | 快速回复快捷方式更新     |
-| updateQuickReplyShortcutDeleted       | -1222702365 | 快速回复快捷方式删除     |
-| updateQuickReplyShortcuts             | 330183448   | 快速回复快捷方式列表更新 |
-| updateQuickReplyShortcutMessages      | 1171042259  | 快捷方式关联消息更新     |
-| updateForumTopicInfo                  | -607369189  | 论坛话题信息更新         |
-| updateScopeNotificationSettings       | -2039845463 | 通知范围设置变更         |
-| updateReactionNotificationSettings    | 1863721143  | 消息反应通知设置         |
-| updateNotification                    | 870995394   | 新通知                   |
-| updateNotificationGroup               | -1193248083 | 通知组更新               |
-| updateActiveNotifications             | 1243505526  | 活动通知更新             |
-| updateHavePendingNotifications        | 1666973286  | 存在待处理通知           |
-| updateDeleteMessages                  | 1983504100  | 消息删除                 |
-| updateChatAction                      | -319118528  | 聊天动作更新             |
-| updateUserStatus                      | 757342063   | 用户状态变更             |
-| updateUser                            | 1726725997  | 用户信息更新             |
-| updateBasicGroup                      | 1364803857  | 基础群组信息更新         |
-| updateSupergroup                      | -823858520  | 超级群组信息更新         |
-| updateSecretChat                      | -1319594324 | 秘密聊天更新             |
-| updateUserFullInfo                    | -41742288   | 用户完整信息更新         |
-| updateBasicGroupFullInfo              | 723448762   | 基础群组完整信息更新     |
-| updateSupergroupFullInfo              | -572776518  | 超级群组完整信息更新     |
-| updateServiceNotification             | -755427580  | 服务通知                 |
-| updateFile                            | 323665571   | 文件状态更新             |
-| updateFileGenerationStart             | -1759823324 | 文件生成开始             |
-| updateFileGenerationStop              | -462955325  | 文件生成停止             |
-| updateFileDownloads                   | 1752459041  | 文件下载列表更新         |
-| updateFileAddedToDownloads            | 43183887    | 文件添加到下载列表       |
-| updateFileDownload                    | -1258147869 | 文件下载进度更新         |
-| updateFileRemovedFromDownloads        | 1116502135  | 文件从下载列表移除       |
-| updateApplicationVerificationRequired | -959062010  | 需要应用验证             |
-| updateCall                            | 2032655786  | 通话状态更新             |
-| updateGroupCall                       | -207539262  | 群组通话更新             |
-| updateGroupCallParticipant            | -42203166   | 群组通话参与者更新       |
-| updateNewCallSignalingData            | -46501556   | 新通话信令数据           |
-| updateUserPrivacySettingRules         | -891557122  | 用户隐私规则变更         |
-| updateUnreadMessageCount              | 269100512   | 未读消息计数更新         |
-| updateUnreadChatCount                 | -1952166321 | 未读聊天计数更新         |
-| updateStory                           | 1159950135  | 新故事                   |
-| updateStoryDeleted                    | 1828884987  | 故事删除                 |
-| updateStorySendSucceeded              | -1850753519 | 故事发送成功             |
-| updateStorySendFailed                 | -1199932368 | 故事发送失败             |
-| updateChatActiveStories               | -303641433  | 聊天活跃故事更新         |
-| updateStoryListChatCount              | 1655670148  | 故事列表聊天计数更新     |
-| updateStoryStealthMode                | -1217389926 | 故事隐身模式变更         |
-| updateOption                          | -219376956  | 系统选项变更             |
-| updateStickerSet                      | 1441697570  | 贴纸包更新               |
-| updateInstalledStickerSets            | -1602833702 | 已安装贴纸包更新         |
-| updateTrendingStickerSets             | -1177211477 | 热门贴纸包更新           |
-| updateRecentStickers                  | 852034306   | 最近使用贴纸更新         |
-| updateFavoriteStickers                | -133073537  | 收藏贴纸更新             |
-| updateSavedAnimations                 | 2134215811  | 收藏动画更新             |
-| updateSavedNotificationSounds         | -949644934  | 收藏通知音更新           |
-| updateDefaultBackground               | 1398133353  | 默认背景变更             |
-| updateChatThemes                      | -824218132  | 聊天主题列表更新         |
-| updateAccentColors                    | 971843510   | 强调色配置更新           |
-| updateProfileAccentColors             | 1613432375  | 个人资料强调色更新       |
-| updateLanguagePackStrings             | -1788062430 | 语言包字符串更新         |
-| updateConnectionState                 | -752135718  | 连接状态变更             |
-| updateTermsOfService                  | 2039407702  | 服务条款更新             |
-| updateUnconfirmedSession              | 1403028536  | 未确认会话更新           |
-| updateAttachmentMenuBots              | 1477564583  | 附件菜单机器人更新       |
-| updateWebAppMessageSent               | 560142041   | Web应用消息已发送        |
-| updateActiveEmojiReactions            | -1760256808 | 活跃表情反应更新         |
-| updateAvailableMessageEffects         | 1754944533  | 可用消息特效更新         |
-| updateDefaultReactionType             | 1773108168  | 默认反应类型变更         |
-| updateSavedMessagesTags               | -2084330623 | 收藏消息标签更新         |
-| updateActiveLiveLocationMessages      | 1212167376  | 活跃实时位置消息更新     |
-| updateOwnedStarCount                  | -881710874  | 拥有星星数变更           |
-| updateChatRevenueAmount               | -1203666574 | 聊天收入金额更新         |
-| updateStarRevenueStatus               | 1724050486  | 星星收入状态更新         |
-| updateSpeechRecognitionTrial          | -909708149  | 语音识别试用状态         |
-| updateDiceEmojis                      | -1972497245 | 骰子表情更新             |
-| updateAnimatedEmojiMessageClicked     | 1219101731  | 动态表情消息点击         |
-| updateAnimationSearchParameters       | 211005413   | 动画搜索参数更新         |
-| updateSuggestedActions                | -1011655660 | 建议操作更新             |
-| updateSpeedLimitNotification          | -1819062062 | 速度限制通知             |
-| updateContactCloseBirthdays           | 1146399560  | 近期联系人生日提醒       |
-| updateAutosaveSettings                | 1652579806  | 自动保存设置更新         |
-| updateBusinessConnection              | 124594551   | 商业连接更新             |
-| updateNewBusinessMessage              | -2072712667 | 新商业消息               |
-| updateBusinessMessageEdited           | -694758612  | 商业消息被编辑           |
-| updateBusinessMessagesDeleted         | 1957674045  | 商业消息删除             |
-| updateNewInlineQuery                  | 123664021   | 新内联查询               |
-| updateNewChosenInlineResult           | -364497163  | 新选择的内联结果         |
-| updateNewCallbackQuery                | -1373284071 | 新回调查询               |
-| updateNewInlineCallbackQuery          | -417839956  | 新内联回调查询           |
-| updateNewBusinessCallbackQuery        | 1236194554  | 新商业回调查询           |
-| updateNewShippingQuery                | -719100935  | 新物流查询               |
-| updateNewPreCheckoutQuery             | -1283110297 | 新预结算查询             |
-| updateNewCustomEvent                  | 1571868573  | 新自定义事件             |
-| updateNewCustomQuery                  | -1405841150 | 新自定义查询             |
-| updatePoll                            | -1008376423 | 投票更新                 |
-| updatePollAnswer                      | -2081070398 | 投票答案更新             |
-| updateChatMember                      | -1252397103 | 群组成员变更             |
-| updateNewChatJoinRequest              | 2057905329  | 新加群请求               |
-| updateChatBoost                       | 815986420   | 聊天助力状态更新         |
-| updateMessageReaction                 | 1244381340  | 消息反应更新             |
-| updateMessageReactions                | 1021438439  | 消息反应列表更新         |
-| updatePaidMediaPurchased              | 1437346651  | 付费媒体购买完成         |
-
-
----
-
-### 消息类型
-| 消息英文名                          | 消息数值    | 注释                 |
-| ----------------------------------- | ----------- | -------------------- |
-| messageText                         | -1004889469 | 文本                 |
-| messageAnimation                    | -1903233772 | 动画                 |
-| messageAudio                        | 854335249   | 音频                 |
-| messageDocument                     | 1996383915  | 文件                 |
-| messagePaidMedia                    | -653262820  | 付费媒体             |
-| messagePhoto                        | 1795698705  | 照片                 |
-| messageSticker                      | 1139114511  | 贴纸                 |
-| messageVideo                        | -10894770   | 视频                 |
-| messageVideoNote                    | 600272247   | 视频笔记             |
-| messageVoiceNote                    | -1935007008 | 语音笔记             |
-| messageExpiredPhoto                 | 500253180   | 过期照片             |
-| messageExpiredVideo                 | -503630988  | 过期视频             |
-| messageExpiredVideoNote             | -846294150  | 过期视频笔记         |
-| messageExpiredVoiceNote             | 1825677531  | 过期语音笔记         |
-| messageLocation                     | -1624966077 | 位置                 |
-| messageVenue                        | 1057294     | 地点                 |
-| messageContact                      | 1583956821  | 联系人               |
-| messageAnimatedEmoji                | 953974518   | 动态表情             |
-| messageDice                         | 911911746   | 骰子                 |
-| messageGame                         | -264771870  | 游戏                 |
-| messagePoll                         | 176399664   | 投票                 |
-| messageStory                        | -1367829782 | 故事                 |
-| messageInvoice                      | 600618902   | 账单                 |
-| messageCall                         | -259757772  | 通话                 |
-| messageVideoChatScheduled           | 457538586   | 视频聊天已计划       |
-| messageVideoChatStarted             | -92440088   | 视频聊天已开始       |
-| messageVideoChatEnded               | -1481802695 | 视频聊天已结束       |
-| messageInviteVideoChatParticipants  | 37276212    | 邀请视频聊天参与者   |
-| messageBasicGroupChatCreate         | 1076320297  | 基础群组创建         |
-| messageSupergroupChatCreate         | -359414622  | 超级群组创建         |
-| messageChatChangeTitle              | 698170261   | 群组标题变更         |
-| messageChatChangePhoto              | -1559745145 | 群组照片变更         |
-| messageChatDeletePhoto              | 1446389619  | 群组照片删除         |
-| messageChatAddMembers               | 15051079    | 添加群组成员         |
-| messageChatJoinByLink               | 294385093   | 通过链接加入群组     |
-| messageChatJoinByRequest            | -1364935749 | 通过请求加入群组     |
-| messageChatDeleteMember             | -106253512  | 移除群组成员         |
-| messageChatUpgradeTo                | 509508753   | 升级为超级群组       |
-| messageChatUpgradeFrom              | 2104899248  | 来自基础群组的升级   |
-| messagePinMessage                   | 1100428272  | 置顶消息             |
-| messageScreenshotTaken              | 3654512     | 截图已拍摄           |
-| messageChatSetBackground            | 1373372403  | 设置聊天背景         |
-| messageChatSetTheme                 | -681630064  | 设置聊天主题         |
-| messageChatSetMessageAutoDeleteTime | -2063974150 | 设置消息自动删除时间 |
-| messageChatBoost                    | -146391445  | 聊天助力             |
-| messageForumTopicCreated            | -1720712423 | 论坛话题已创建       |
-| messageForumTopicEdited             | -1862837762 | 论坛话题已编辑       |
-| messageForumTopicIsClosedToggled    | 660940201   | 论坛话题关闭状态切换 |
-| messageForumTopicIsHiddenToggled    | -2006200911 | 论坛话题隐藏状态切换 |
-| messageSuggestProfilePhoto          | 571331027   | 建议个人资料照片     |
-| messageCustomServiceAction          | 1354147370  | 自定义服务操作       |
-| messageGameScore                    | -1165684732 | 游戏得分             |
-| messagePaymentSuccessful            | 2120666353  | 支付成功             |
-| messagePaymentSuccessfulBot         | 2058363413  | 机器人支付成功       |
-| messagePaymentRefunded              | -291658058  | 支付已退款           |
-| messageGiftedPremium                | -518216664  | 赠送的Premium        |
-| messagePremiumGiftCode              | 832738543   | Premium礼包码        |
-| messageGiveawayCreated              | 1016991061  | 赠品活动已创建       |
-| messageGiveaway                     | -651447163  | 赠品                 |
-| messageGiveawayCompleted            | -834319936  | 赠品活动已完成       |
-| messageGiveawayWinners              | 270603081   | 赠品获胜者           |
-| messageGiftedStars                  | 742894647   | 赠送的Stars          |
-| messageGiveawayPrizeStars           | -571418440  | 赠品Stars奖励        |
-| messageGift                         | 175044533   | 礼物                 |
-| messageContactRegistered            | 652760578   | 联系人已注册         |
-| messageUsersShared                  | -1765001568 | 用户已分享           |
-| messageChatShared                   | -1513062748 | 聊天已分享           |
-| messageBotWriteAccessAllowed        | -793695771  | 机器人写入权限已允许 |
-| messageWebAppDataSent               | 595300066   | Web应用数据已发送    |
-| messageWebAppDataReceived           | -2137137867 | Web应用数据已接收    |
-| messagePassportDataSent             | -1159521439 | 通行证数据已发送     |
-| messagePassportDataReceived         | -1039560424 | 通行证数据已接收     |
-| messageProximityAlertTriggered      | -1433447220 | 接近警报已触发       |
-| messageUnsupported                  | 1528490090  | 不支持的类型         |
-
-
----
