@@ -23,7 +23,8 @@
 > [开发指南](/开发指南.md)     
 
 ## 使用
-> ~~本框架可免费试用，联系 https://t.me/secp256k0~~     
+> ~~本框架可免费试用，联系 https://t.me/secp256k0~~
+> 测试序列号(每周清理)：dev-60200003100:YBIF0eIGFDBXWHxtiyGtJT7jBkGYDmDP   
 > 如需购买付费版或定制插件，联系 https://t.me/secp256k0  
 > 另接TRX兑换机器人，能量租赁机器人，钱包机器人等各类TG机器人开发
 
